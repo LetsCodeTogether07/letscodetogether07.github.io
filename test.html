@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test</title>
+    <style>
+        .bottom {
+            position: relative;
+            bottom: 0px;
+        }
+
+        button {
+            height: 50px;
+            width: 150px;
+            cursor: pointer;
+            margin: 8px;
+        }
+
+        .center-align {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body class="center-align">
+    <h1 id="message">This is just the FRONT-END. Click the button to trigger API call</h1>
+    <textarea style="width: 80%; height: auto;" name="API response" id="api-response" readonly rows="20"></textarea>
+    <div>
+        <button onclick=callAPI()>Click Me</button>
+    </div>
+
+    <h2 class="bottom">Demonstration of Frontend and Backend</h2>
+
+
+    <script>
+        function callAPI() {
+            document.getElementById("message").innerHTML = "Triggered API call. Waiting for response..."
+            fetch("https://api.restful-api.dev/objects").then((response) => response.json()).then((data) => {
+                setTimeout(() => {
+                    document.getElementById("api-response").innerHTML = JSON.stringify(data, null, 4);
+                    document.getElementById("message").innerHTML = "Response fetched from the endpoint and inserted in textarea"
+                }, 5000)
+            });
+
+        }
+    </script>
+</body>
+
+</html>
